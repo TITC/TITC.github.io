@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_package_v0.16/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_package_v0.16/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_package_v0.16/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon_package_v0.16/android-chrome-192x192.png" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="92en5rHPRTytzbXTFxwVoh-8sfdA2EE9lH7SrJaqbT4">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"titc.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"facebook_comments_plugin","storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="PDF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CHAPTER 7 Ensemble Learning and Random Forests">
+<meta property="og:url" content="http://titc.github.io/2020/04/05/Ensemble-Learning-and-Random-Forests/index.html">
+<meta property="og:site_name" content="Time is a choice">
+<meta property="og:description" content="PDF">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://titc.github.io/images/The%20law%20of%20large%20number%20definition6.2.1.png">
+<meta property="og:image" content="http://titc.github.io/images/Number_of_coin_tosses.png">
+<meta property="og:image" content="http://titc.github.io/images/Number_of_coin_tosses_990000.png">
+<meta property="og:image" content="http://titc.github.io/images/criterion_eq_expectation.png">
+<meta property="og:image" content="http://titc.github.io/images/criterion_lessthan_expectation.png">
+<meta property="og:image" content="http://titc.github.io/images/criterion_bigthan_expectation.png">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/f/f8/Blind_men_and_elephant3.jpg">
+<meta property="article:published_time" content="2020-04-05T09:45:58.000Z">
+<meta property="article:modified_time" content="2020-04-08T08:35:34.185Z">
+<meta property="article:author" content="Yuhang Tao">
+<meta property="article:tag" content="machine learning">
+<meta property="article:tag" content="supervised learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://titc.github.io/images/The%20law%20of%20large%20number%20definition6.2.1.png">
+
+<link rel="canonical" href="http://titc.github.io/2020/04/05/Ensemble-Learning-and-Random-Forests/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>CHAPTER 7 Ensemble Learning and Random Forests | Time is a choice</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Time is a choice</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">The future totally depends on the manner how to spend your time wisely</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">10</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">24</span></a>
+
+  </li>
+        <li class="menu-item menu-item-reading-paper">
+
+    <a href="/categories/ReadingPaper/" rel="section"><i class="fa fa-print fa-fw"></i>Reading paper</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://titc.github.io/2020/04/05/Ensemble-Learning-and-Random-Forests/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Yuhang Tao">
+      <meta itemprop="description" content="Memoey lost with time,so I decide to record it.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Time is a choice">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CHAPTER 7 Ensemble Learning and Random Forests
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-05 17:45:58" itemprop="dateCreated datePublished" datetime="2020-04-05T17:45:58+08:00">2020-04-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-08 16:35:34" itemprop="dateModified" datetime="2020-04-08T16:35:34+08:00">2020-04-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Books/" itemprop="url" rel="index"><span itemprop="name">Books</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Books/Hands-On-Machine-Learning-with-Scikit-Learn-and-TensorFlow/" itemprop="url" rel="index"><span itemprop="name">Hands On Machine Learning with Scikit Learn and TensorFlow</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/04/05/Ensemble-Learning-and-Random-Forests/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/04/05/Ensemble-Learning-and-Random-Forests/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>11k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>10 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="note default">
+            <h2 id="pdf"><a class="markdownIt-Anchor" href="#pdf"></a> PDF</h2>
+          </div>
+<div class="pdfobject-container" data-target="/uploads/Ensemble Learning and Random Forests.pdf" data-height="500px"></div>
+<a id="more"></a>
+<div class="note default">
+            <h2 id="voting-classifier"><a class="markdownIt-Anchor" href="#voting-classifier"></a> Voting Classifier</h2>
+          </div>
+<h3 id="keypoint"><a class="markdownIt-Anchor" href="#keypoint"></a> Keypoint</h3>
+<ul>
+<li>as soon as possible to train independent classifiers,otherwise they will make the same error</li>
+<li>make sure not to train on the same data. furthermore not train on the same distribution’s data</li>
+<li>to train them using very different algorithm</li>
+<li>let them make very different types of errors.</li>
+</ul>
+<h3 id="main-idea"><a class="markdownIt-Anchor" href="#main-idea"></a> Main idea</h3>
+<blockquote class="blockquote-center">
+            <i class="fa fa-quote-left"></i>
+            <p>The law of large number definition6.2.1<br />
+<img src="/images/The%20law%20of%20large%20number%20definition6.2.1.png" class="[The law of large number definition6.2.1]" title="Probability and statistics Fourth Edition" alt="Probability and statistics Fourth Edition"></p>
+
+            <i class="fa fa-quote-right"></i>
+          </blockquote>
+<h3 id="combine-original-text"><a class="markdownIt-Anchor" href="#combine-original-text"></a> Combine original text</h3>
+<p>The probability of single classifier is barely better than random guessing,but what we focused isn’t the the classifier’s precision.Nevertheless we focused on the truth that the classifier is bit lead to expected result than the other one, when we sample thoundsands classifiers and then the frequency of barely expected results is much close to 1.</p>
+<p><img src="/images/Number_of_coin_tosses.png" alt="number of coin tosses" title="number of coin tosses" /></p>
+<h3 id="code-analysis"><a class="markdownIt-Anchor" href="#code-analysis"></a> Code analysis</h3>
+<p>change how your Python module is parsed<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
+<figure class="highlight python"><figcaption><span>_.compact</span><a href="http://underscorejs.org/#compact" target="_blank" rel="noopener">import</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#To support both python 2 and python 3</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> division, print_function, unicode_literals</span><br></pre></td></tr></table></figure>
+<p>np lib is for create matrix,or generate random number,os lib is for python to operate path,and matplotlib is used to plot math function.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Common imports</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="comment">#to make this notebook's output stable across runs</span></span><br><span class="line">np.random.seed(<span class="number">42</span>)</span><br><span class="line"><span class="keyword">import</span> os.path  </span><br><span class="line"><span class="comment"># To plot pretty figures</span></span><br><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br></pre></td></tr></table></figure>
+<p>rc is abbreviation of runtime configuration<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mpl.rc(<span class="string">'axes'</span>, labelsize=<span class="number">14</span>) <span class="comment"># = rcParams['axes.linewidth'] = 14</span></span><br><span class="line">mpl.rc(<span class="string">'xtick'</span>, labelsize=<span class="number">12</span>)<span class="comment"># = rcParams['xtick.labelsize']=12</span></span><br><span class="line">mpl.rc(<span class="string">'ytick'</span>, labelsize=<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
+<p>create two help function for save img</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Where to save the figures</span></span><br><span class="line">PROJECT_ROOT_DIR = <span class="string">"."</span></span><br><span class="line">CHAPTER_ID = <span class="string">"ensembles"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">image_path</span><span class="params">(fig_id)</span>:</span></span><br><span class="line">    path = os.path.join(PROJECT_ROOT_DIR, <span class="string">""</span>, CHAPTER_ID)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.isdir(path):</span><br><span class="line">      os.mkdir(path)</span><br><span class="line">    <span class="keyword">return</span> os.path.join(path,fig_id)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_fig</span><span class="params">(fig_id, tight_layout=True)</span>:</span></span><br><span class="line">    print(<span class="string">"Saving figure"</span>, fig_id)</span><br><span class="line">    <span class="keyword">if</span> tight_layout:</span><br><span class="line">        plt.tight_layout()</span><br><span class="line">    plt.savefig(image_path(fig_id) + <span class="string">".png"</span>, format=<span class="string">'png'</span>, dpi=<span class="number">300</span>)</span><br></pre></td></tr></table></figure>
+<p>difine some variable</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Expectation  = <span class="number">0.51</span></span><br><span class="line">heads_proba = Expectation</span><br><span class="line">Epsilon = <span class="number">0.08</span></span><br><span class="line">guss_proba = <span class="number">0.50</span></span><br><span class="line">toss_times = <span class="number">100000</span></span><br><span class="line">predictor_num = <span class="number">15</span></span><br></pre></td></tr></table></figure>
+<p>start toss</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">coin_tosses = (np.random.rand(toss_times, predictor_num) &lt; heads_proba).astype(np.int32) <span class="comment"># 0,1,0,1 sequences</span></span><br></pre></td></tr></table></figure>
+<p>make cumulative sum<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup> and reshape automatically<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cumulative_heads_ratio = np.cumsum(coin_tosses, axis=<span class="number">0</span>) / np.arange(<span class="number">1</span>, toss_times+<span class="number">1</span>).reshape(<span class="number">-1</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>Open two subplot<sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup> wich sharing x axis.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f, (ax1,ax2) = plt.subplots(<span class="number">2</span>, <span class="number">1</span>, sharex=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p>set plot size(whole subplot)<sup class="footnote-ref"><a href="#fn6" id="fnref6">[6]</a></sup></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f.set_figheight(<span class="number">10</span>)</span><br><span class="line">f.set_figwidth(<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+<p>drawing baseline respective for guess and expectation.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Expectation value</span></span><br><span class="line">ax1.plot([<span class="number">0</span>, toss_times], [heads_proba, heads_proba], <span class="string">"k--"</span>, linewidth=<span class="number">2</span>, label=heads_proba)</span><br><span class="line"><span class="comment">#gussing value</span></span><br><span class="line">ax1.plot([<span class="number">0</span>, toss_times], [guss_proba, guss_proba], <span class="string">"k-"</span>, label=guss_proba)</span><br></pre></td></tr></table></figure>
+<p>plot head ration<sup class="footnote-ref"><a href="#fn7" id="fnref7">[7]</a></sup></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ax1.set_xlabel(<span class="string">"Number of coin tosses"</span>)</span><br><span class="line">ax1.set_ylabel(<span class="string">"Heads ratio"</span>)</span><br><span class="line">ax1.legend(loc=<span class="string">"lower right"</span>)</span><br><span class="line">ax1.axis([<span class="number">0</span>, toss_times, guss_proba-Epsilon, guss_proba+Epsilon])</span><br><span class="line">save_fig(<span class="string">"law_of_large_numbers_plot"</span>)</span><br><span class="line">ax1.plot(cumulative_heads_ratio)</span><br></pre></td></tr></table></figure>
+<p>plot the probability of obtaining a majority of heads</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">law_of_large_number = np.cumsum(cumulative_heads_ratio&gt;<span class="number">0.5</span>,axis=<span class="number">0</span>)/np.arange(<span class="number">1</span>, toss_times+<span class="number">1</span>).reshape(<span class="number">-1</span>, <span class="number">1</span>)</span><br><span class="line">ax2.set_ylabel(<span class="string">"The probability of obtaining a majority of heads"</span>)</span><br><span class="line">ax2.axis([<span class="number">0</span>, toss_times, <span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line">ax2.plot(law_of_large_number)</span><br></pre></td></tr></table></figure>
+<p>after toss 990000</p>
+<p><img src="/images/Number_of_coin_tosses_990000.png" alt="result_Number_of_coin_tosses_990000.png" title="number of coin tosses" /></p>
+<h3 id="prerequisite"><a class="markdownIt-Anchor" href="#prerequisite"></a> Prerequisite</h3>
+<p>The assume criterion must low than the Expectation value,other wise the the result will not converge to 1<br />
+<a href="#converge-1">criterion == guess == 0.34 == expectation = 0.34</a><br />
+<a href="#converge-2">criterion == guess == 0.34 &lt; expectation  = 0.35</a><br />
+<a href="#converge-3">criterion == guess == 0.34 &gt; expectation  = 0.33</a></p>
+<div class="tabs" id="converge"><ul class="nav-tabs"><li class="tab active"><a href="#converge-1">criterion == expectation</a></li><li class="tab"><a href="#converge-2">criterion < expectation</a></li><li class="tab"><a href="#converge-3">criterion > expectation</a></li></ul><div class="tab-content"><div class="tab-pane active" id="converge-1"><p><img src="/images/criterion_eq_expectation.png" alt="c_eq_e" /></p></div><div class="tab-pane" id="converge-2"><p><img src="/images/criterion_lessthan_expectation.png" alt="c_lessthan_e" /></p></div><div class="tab-pane" id="converge-3"><p><img src="/images/criterion_bigthan_expectation.png" alt="c_bigthan_e" /></p></div></div></div>
+<p>We can conclude that the most critical relation is none about the guess probability,nevertheless it’s deceided by  and criterion</p>
+<h3 id="run-code-oneline"><a class="markdownIt-Anchor" href="#run-code-oneline"></a> Run code oneline</h3>
+<p>directly run in <a href="https://colab.research.google.com/drive/1I-LWyYq4-vBPUa-bhjPCF_oSBeyKeG33" target="_blank" rel="noopener">google colab</a>,forked from ageron<sup class="footnote-ref"><a href="#fn8" id="fnref8">[8]</a></sup>, but add some vision features and fixed path problem to adapt google colab.</p>
+<p>unfinished part<sup class="footnote-ref"><a href="#fn9" id="fnref9">[9]</a></sup>:</p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        unfinished part
+    </div>
+    <div class='spoiler-content'>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">## Bagging and Pasting</span><br><span class="line"></span><br><span class="line">### Bagging and Pasting in Scikit-Learn </span><br><span class="line"></span><br><span class="line">### Out-of-Bag Evaluation</span><br><span class="line"></span><br><span class="line">## Random Patches and Random Subspaces</span><br><span class="line"></span><br><span class="line">## Random Forests</span><br><span class="line"></span><br><span class="line">### Extra-Trees</span><br><span class="line"></span><br><span class="line">### Feature Importance</span><br><span class="line"></span><br><span class="line">## Boosting</span><br><span class="line"></span><br><span class="line">### AdaBoost</span><br><span class="line"></span><br><span class="line">### Gradient Boosting</span><br><span class="line"></span><br><span class="line">## Stacking</span><br><span class="line"></span><br><span class="line">## Exercises</span><br></pre></td></tr></table></figure>
+    </div>
+</div>
+<div class="note default">
+            <!--more--><h2 id="comprehension"><a class="markdownIt-Anchor" href="#comprehension"></a> Comprehension</h2>
+          </div>
+<h3 id="blind-men-and-an-elephant"><a class="markdownIt-Anchor" href="#blind-men-and-an-elephant"></a> Blind men and an elephant</h3>
+<p>First, we talk about an ancient parable <a href="https://en.wikipedia.org/wiki/Blind_men_and_an_elephant" target="_blank" rel="noopener">Blind men and an elephant</a></p>
+<blockquote class="blockquote-center">
+            <i class="fa fa-quote-left"></i>
+            <p>A group of blind men heard that a strange animal, called an elephant, had been brought to the town, but none of them were aware of its shape and form. Out of curiosity, they said: “We must inspect and know it by touch, of which we are capable”. So, they sought it out, and when they found it they groped about it. In the case of the first person, whose hand landed on the trunk, said “This being is like a thick snake”. For another one whose hand reached its ear, it seemed like a kind of fan. As for another person, whose hand was upon its leg, said, the elephant is a pillar like a tree-trunk. The blind man who placed his hand upon its side said the elephant, “is a wall”. Another who felt its tail, described it as a rope. The last felt its tusk, stating the elephant is that which is hard, smooth and like a spear.</p>
+
+            <i class="fa fa-quote-right"></i>
+          </blockquote>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Blind_men_and_elephant3.jpg" alt="File:Blind_men_and_elephant3" /></p>
+<h4 id="read-the-story-again"><a class="markdownIt-Anchor" href="#read-the-story-again"></a> Read the story again</h4>
+<ul>
+<li>The situation is <span class="label primary">blind man</span> to recognize this <span class="label primary">stange animal</span>.</li>
+<li>The <span class="label primary">manner</span> that they  to recognize is  <span class="label primary">touch</span>.</li>
+<li>The initial <span class="label primary">memory</span> about this stange animal is <span class="label primary">none</span>.
+<ul>
+<li>The first <span class="label success">person</span> groped its <span class="label info">trunk</span> ,then he pridicts it as an thick <span class="label warning">snake</span>.</li>
+<li>The second <span class="label success">person</span> groped its <span class="label info">ear</span>,then he pridicts it as a kind of <span class="label warning">fan</span>.</li>
+<li>The third <span class="label success">person</span> groped its <span class="label info">leg</span>,then he pridicts it as a <span class="label warning">tree-trunk</span>.</li>
+<li>The fourth <span class="label success">person</span> groped its <span class="label info">side</span>,then he prdicts it as a <span class="label warning">wall</span>.</li>
+<li>The fifth <span class="label success">person</span> groped its <span class="label info">tail</span>,then he pridicts it as a <span class="label warning">rope</span>.</li>
+<li>The last <span class="label success">person</span> groped its <span class="label info">tusk</span>,then he pridicts it as a <span class="label warning">spere</span>.</li>
+</ul>
+</li>
+</ul>
+<p>But if we gattered them pricits, we will get a much better predict about how does the elephant look like.</p>
+<h4 id="tweak-the-story"><a class="markdownIt-Anchor" href="#tweak-the-story"></a> Tweak the story</h4>
+<ul>
+<li>The situation is <span class="label primary">precitor</span> to recognize this <span class="label primary">training dataset</span>.</li>
+<li>The <span class="label primary">manner</span> that they  to recognize is  <span class="label primary">fitting model</span>.</li>
+<li>The initial <span class="label primary">trained weights</span> about this dataset is <span class="label primary">none</span>.
+<ul>
+<li>The first <span class="label success">precitor</span> fit on <span class="label info">subset 1 of training dataset</span> ,then he pridicts it as an thick <span class="label warning">snake</span>.</li>
+<li>The second <span class="label success">precitor</span> fit on <span class="label info">subset 2 of training dataset</span>,then he pridicts it as a kind of <span class="label warning">fan</span>.</li>
+<li>The third <span class="label success">precitor</span> fit on <span class="label info">subset 3 of training dataset</span>,then he pridicts it as a <span class="label warning">tree-trunk</span>.</li>
+<li>The fourth <span class="label success">precitor</span> fit on <span class="label info">subset 4 of training dataset</span>,then he prdicts it as a <span class="label warning">wall</span>.</li>
+<li>The fifth <span class="label success">precitor</span> fit on <span class="label info">subset 5 of training dataset</span>,then he pridicts it as a <span class="label warning">rope</span>.</li>
+<li>The last <span class="label success">precitor</span> fit on <span class="label info">subset 6 of training dataset</span>,then he pridicts it as a <span class="label warning">spere</span>.</li>
+</ul>
+</li>
+</ul>
+<p>But if we simply sum these result,we can get a much better performance with it.</p>
+<hr />
+<h4 id="prerequisites"><a class="markdownIt-Anchor" href="#prerequisites"></a> Prerequisites</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Story</th>
+<th style="text-align:center">Task</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">The elephant is a real elephant, not a dog or cat.</td>
+<td style="text-align:center">the gourd truth[<strong>GT</strong>] is none error in it.</td>
+</tr>
+<tr>
+<td style="text-align:center">The error is comes from misunderstand</td>
+<td style="text-align:center">the model is underfitting.</td>
+</tr>
+<tr>
+<td style="text-align:center">Each person only recognized partial of the elephant</td>
+<td style="text-align:center">Each predictor is trained at subset dataset</td>
+</tr>
+</tbody>
+</table>
+<h4 id="advantage-than-single-personpridictor"><a class="markdownIt-Anchor" href="#advantage-than-single-personpridictor"></a> Advantage than single person/pridictor</h4>
+<ul>
+<li>parallel mission, more efficient.</li>
+<li>more comprehensive information</li>
+<li>more close to the truth.</li>
+</ul>
+<p>The third point of multi-predictor is more close to truth is due to each predecessor has refined the origin dataset,and extract more useful feature correlated to the judgments based,and deprecat the rest of uncorrelated feature.Based on these information, we can make a better precition.Furthermore we can use these new feature to train a new model rather than simply sum them,and that may give us a better prediction.</p>
+<h3 id="bad-advice-versus-handcraft-mislabel"><a class="markdownIt-Anchor" href="#bad-advice-versus-handcraft-mislabel"></a> Bad advice versus handcraft mislabel</h3>
+<p>Let’s talk about a satuation,the suject is you.One day,you want to learn machine learning, and asked thousands of random people,different people give different advice.</p>
+<ul>
+<li>The first people told you machince learning need a good mathmatical basics, otherwise you can’t make sense anthing.</li>
+<li>The second people told you can learn from scratch even you have no basic in it before.</li>
+<li>The third people told you can use Coursera to learn ML.</li>
+<li>The fouth told you hurry give up,it’s unpossible to learn it by your condition.</li>
+<li>some people told you needn’t prepare a good mathmatics as prerequisite,just figure out some detail when you come across it.</li>
+<li>some people  mook you such ignorance.<br />
+…<br />
+Look there are lots of advice, does all of them be a good advice,the answer is NO!But more important thing is finally we still can reach the correct direction, even there much misleading in it.we still can figure out how to learn machine learning.</li>
+</ul>
+<p>But the question is how we did it?</p>
+<p>if we can figure out how we learn some thing from misleading information,then we can train our model in a mislabeled dataset,as I think.</p>
+<p>According my comprehension,the reason is two aspect</p>
+<ol>
+<li>inspiration</li>
+<li>the misleading advice/mislabel dataset is positive correlation to the important advice/feature</li>
+</ol>
+<p><strong>Why do people discourage others?</strong><sup class="footnote-ref"><a href="#fn10" id="fnref10">[10]</a></sup></p>
+<blockquote><ul>
+<li><strong>1) They can’t do what you want to do:</strong><br />
+If i believe that i can’t succeed then i will assume that other people won’t be able to succeed as well unless they are <a href="https://www.2knowmyself.com/does_luck_has_anything_to_do_with_success" target="_blank" rel="noopener">lucky</a>. Now when i meet an enthusiastic person who claims that he can succeed i will certainly try to infect him with my <a href="https://www.2knowmyself.com/how_limiting_beliefs_are_created" target="_blank" rel="noopener">negative beliefs</a>.</li>
+<li><strong>2) They were threatened by you:</strong><br />
+Some people feel threatened whenever they find anybody trying to do something that they never dared to do. If someone always wanted to be rich but never dared to start a <a href="https://www.2knowmyself.com/how_to_start_a_successful_business_from_scratch" target="_blank" rel="noopener">private business</a> then he will feel threatened if he found you taking this step. In such a case this person might put you down just to make sure that you won’t bypass him and become better than him</li>
+<li><strong>3) They are jealous:</strong><br />
+Believe it or not, a close friend may try to discourage you just because he is <a href="https://www.2knowmyself.com/how_to_identify_jealous_people" target="_blank" rel="noopener">jealous</a> of you. If you are getting more attention than him or if he feels incompetent compared to you then he might put you down just because he feels jealous</li>
+<li><strong>4) He is afraid:</strong><br />
+When i proposed my first book to the owner of a publishing house back in 2006 the man refused to publish it claiming that he only publishes books about politics. Later on when i sold more than 1 million worth of copies (see <a href="https://www.2knowmyself.com/Making_money_from_the_internet" target="_blank" rel="noopener">How i did it</a>) i realized that the man was just afraid to take the risk because i seemed young and so he chose to put me down</li>
+<li><strong>5) They hate you:</strong> If a person hates you he wont want to see you succeeding at anything and that’s why he will try to discourage you whenever he gets the chance. Beware of enemies who come disguised as friends (see <a href="https://www.2knowmyself.com/how_to_deal_with_someone_who_hates_you_at_work" target="_blank" rel="noopener">Dealing with people who hate you at work</a>)</li>
+<li><strong>6) They are not well informed:</strong><br />
+Many people hate to say “I don’t know” when they are asked about something. When people lack sufficient knowledge about what you are planning to do they might put you down just not to say “I don’t know”</li>
+<li><strong>7) They can’t see the full picture:</strong> some people will put you down just because they can’t see the full picture you saw. Those people might have good intentions but in the end they will do the same harm that others who bad intentions did</li>
+</ul>
+<footer><strong>By M.Farouk Radwan, MSc</strong><cite><a href="https://www.2knowmyself.com/why_do_people_discourage_others" target="_blank" rel="noopener">Why do people discourage others</a></cite></footer></blockquote>
+<hr />
+<h4 id="so-we-can-take-such-manner-to-treat-these-information"><a class="markdownIt-Anchor" href="#so-we-can-take-such-manner-to-treat-these-information"></a> So we can take such manner to treat these information</h4>
+<ul>
+<li>You can’t do it,it’s impossible. means <strong>You can do it</strong>.</li>
+<li>You can’t learn machine learning forever,because you such bad in math. means <strong>as long as you improve you math,you can do a pretty good job in it,Go,GO,GO!!!</strong></li>
+</ul>
+<p>Does these make much sense?</p>
+<h4 id="back-to-our-mislabeled-dataset"><a class="markdownIt-Anchor" href="#back-to-our-mislabeled-dataset"></a> Back to our mislabeled dataset</h4>
+<p>Let me ask you some question,what’s the reason of mislabel?</p>
+<ul>
+<li>Due to these parts is more important than others.</li>
+<li>These features are more easy to make fault even for human.</li>
+<li>These part is what we called “Vehicle blind spot”.</li>
+</ul>
+<p>we can’t realize each part of the reason why human make fault,but we can just put these to a Neural Network and let it figure out the reason.</p>
+<p>What’s the target  of training model?</p>
+<ul>
+<li>we want to extract the most import,or most correlated feature.</li>
+</ul>
+<p>These mislabel feature told model which part is more important, if we can just penalize these feature’s weight and argument the opposite feature(if we can do it).</p>
+<h2 id="appendix"><a class="markdownIt-Anchor" href="#appendix"></a> Appendix</h2>
+<p><a href="https://github.com/theme-next/hexo-theme-next/issues/716" target="_blank" rel="noopener">NexT.Pisces v7.0.1 seems not support Markdown Footnotes</a></p>
+<p><a href="https://github.com/theme-next/hexo-theme-next/pull/56" target="_blank" rel="noopener">Add pangu support</a></p>
+<p><a href="https://github.com/theme-next/hexo-theme-next/issues/517" target="_blank" rel="noopener">Can footnotes be integrated into Next | 引用链接效果做成像论文那样 #517</a></p>
+<p><s><a href="https://www.npmjs.com/package/hexo-footnotes" target="_blank" rel="noopener">https://www.npmjs.com/package/hexo-footnotes</a></s></p>
+<p><s><a href="https://www.markdownguide.org/extended-syntax/#fnref:1" target="_blank" rel="noopener">markdown footnote</a></s></p>
+<p><a href="https://karellincoln.github.io/2018/04/04/hexo-new-customization/" target="_blank" rel="noopener">Strikethrough</a></p>
+<p><a href="https://hexo.io/docs/tag-plugins#Examples-1" target="_blank" rel="noopener">how to use codeblock tag-plugins</a></p>
+<hr class="footnotes-sep" />
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><a href="https://stackoverflow.com/questions/7075082/what-is-future-in-python-used-for-and-how-when-to-use-it-and-how-it-works" target="_blank" rel="noopener">What is <strong>future</strong> in Python used for and how/when to use it, and how it works</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p><a href="https://matplotlib.org/3.2.1/tutorials/introductory/customizing.html#a-sample-matplotlibrc-file" target="_blank" rel="noopener">runtime configuration file</a> <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.cumsum.html" target="_blank" rel="noopener">cumulative sum</a> <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn4" class="footnote-item"><p><a href="https://www.youtube.com/watch?v=3wi0lJPfLUY" target="_blank" rel="noopener">-1 in reshape</a> <a href="#fnref4" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn5" class="footnote-item"><p><a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" target="_blank" rel="noopener">subplot in matplotlib</a> <a href="#fnref5" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn6" class="footnote-item"><p><a href="https://stackoverflow.com/questions/14770735/how-do-i-change-the-figure-size-with-subplots" target="_blank" rel="noopener">how to set picture size when we use subplot</a> <a href="#fnref6" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn7" class="footnote-item"><p><a href="https://stackoverflow.com/questions/38662667/matplotlib-and-subplots-properties" target="_blank" rel="noopener">how to set subplot title</a> <a href="#fnref7" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn8" class="footnote-item"><p><a href="(https://github.com/ageron/handson-ml.git)">ageron github</a> <a href="#fnref8" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn9" class="footnote-item"><p><a href="https://github.com/theme-next/hexo-theme-next/issues/200" target="_blank" rel="noopener">Feature request: fold the code [solved] </a> <a href="#fnref9" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn10" class="footnote-item"><p><a href="https://www.2knowmyself.com/why_do_people_discourage_others" target="_blank" rel="noopener">Why do people discourage others?</a> <a href="#fnref10" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Yuhang Tao
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://titc.github.io/2020/04/05/Ensemble-Learning-and-Random-Forests/" title="CHAPTER 7 Ensemble Learning and Random Forests">http://titc.github.io/2020/04/05/Ensemble-Learning-and-Random-Forests/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/en" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/machine-learning/" rel="tag"># machine learning</a>
+              <a href="/tags/supervised-learning/" rel="tag"># supervised learning</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/05/Joint-Optic-Disc-and-Cup-Segmentation-Based-on-Multi-label-Deep-Network-and-Polar-Transformation/" rel="prev" title="Joint Optic Disc and Cup Segmentation Based on Multi-label Deep Network and Polar Transformation">
+      <i class="fa fa-chevron-left"></i> Joint Optic Disc and Cup Segmentation Based on Multi-label Deep Network and Polar Transformation
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/06/law-of-large-numbers-and-central-limit-theorem/" rel="next" title="law of large numbers and central limit theorem">
+      law of large numbers and central limit theorem <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pdf"><span class="nav-number">1.</span> <span class="nav-text"> PDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#voting-classifier"><span class="nav-number">2.</span> <span class="nav-text"> Voting Classifier</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#keypoint"><span class="nav-number">2.1.</span> <span class="nav-text"> Keypoint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#main-idea"><span class="nav-number">2.2.</span> <span class="nav-text"> Main idea</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#combine-original-text"><span class="nav-number">2.3.</span> <span class="nav-text"> Combine original text</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code-analysis"><span class="nav-number">2.4.</span> <span class="nav-text"> Code analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prerequisite"><span class="nav-number">2.5.</span> <span class="nav-text"> Prerequisite</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#run-code-oneline"><span class="nav-number">2.6.</span> <span class="nav-text"> Run code oneline</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#comprehension"><span class="nav-number">3.</span> <span class="nav-text"> Comprehension</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#blind-men-and-an-elephant"><span class="nav-number">3.1.</span> <span class="nav-text"> Blind men and an elephant</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#read-the-story-again"><span class="nav-number">3.1.1.</span> <span class="nav-text"> Read the story again</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tweak-the-story"><span class="nav-number">3.1.2.</span> <span class="nav-text"> Tweak the story</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#prerequisites"><span class="nav-number">3.1.3.</span> <span class="nav-text"> Prerequisites</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#advantage-than-single-personpridictor"><span class="nav-number">3.1.4.</span> <span class="nav-text"> Advantage than single person&#x2F;pridictor</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bad-advice-versus-handcraft-mislabel"><span class="nav-number">3.2.</span> <span class="nav-text"> Bad advice versus handcraft mislabel</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#so-we-can-take-such-manner-to-treat-these-information"><span class="nav-number">3.2.1.</span> <span class="nav-text"> So we can take such manner to treat these information</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#back-to-our-mislabeled-dataset"><span class="nav-number">3.2.2.</span> <span class="nav-text"> Back to our mislabeled dataset</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#appendix"><span class="nav-number">4.</span> <span class="nav-text"> Appendix</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuhang Tao"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Yuhang Tao</p>
+  <div class="site-description" itemprop="description">Memoey lost with time,so I decide to record it.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/TITC" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;TITC" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yuhang.tao.email@gmail.com" title="E-Mail → mailto:yuhang.tao.email@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/yuhang_tao" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;yuhang_tao" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/yuhang.tao.email" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;yuhang.tao.email" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/en" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuhang Tao</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">16k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">14 mins.</span>
+</div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=[object Object]" async="async"></script>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Yuhang.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://titc.github.io/2020/04/05/Ensemble-Learning-and-Random-Forests/";
+    this.page.identifier = "2020/04/05/Ensemble-Learning-and-Random-Forests/";
+    this.page.title = "CHAPTER 7 Ensemble Learning and Random Forests";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Yuhang.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

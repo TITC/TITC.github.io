@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>CHAPTER 1 The Machine Learning Landscape</title>
+    <url>/2020/04/08/CHAPTER-1-The-Machine-Learning-Landscape/</url>
+    <content><![CDATA[<div class="note default">
+            <h2 id="pdf"><a class="markdownIt-Anchor" href="#pdf"></a> PDF</h2>
+          </div>
+<div class="pdfobject-container" data-target="/uploads/Hands On Machine Learning with Scikit Learn and TensorFlow_chapter1_THe machince learning landscape.pdf" data-height="500px"></div>
+<a id="more"></a>
+<div class="note default">
+            <h2 id="run-directlty"><a class="markdownIt-Anchor" href="#run-directlty"></a> Run directlty</h2>
+          </div>
+<p><a href="https://colab.research.google.com/drive/1Id_UV4UtBa1ka-Q3QrNzAAxISNJm6K10" target="_blank" rel="noopener">google colab</a><sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
+<div class="note default">
+            <h2 id="summary"><a class="markdownIt-Anchor" href="#summary"></a> Summary</h2>
+          </div>
+<ol>
+<li>
+<p>about online learning</p>
+<p>if you have limited computing resources: once an online learning system has learned<br />
+about new data instances, it does not need them anymore, so you can discard them.</p>
+</li>
+<li>
+<p>about learning rate</p>
+<p>it’s a kind of state transformer</p>
+<p>One important parameter of online learning systems is how fast they should adapt to<br />
+changing data: this is called the learning rate. If you set a high learning rate, then your<br />
+system will rapidly adapt to new data, but it will also tend to quickly forget the old<br />
+data.</p>
+</li>
+<li>
+<p>learning by heart</p>
+<p>this kind of leaning is only learning by memory, just like some human’s learning, only can reproduce what it memorized.</p>
+<p>this kind of learning is lack abstract ability, data in ,data out.</p>
+<p>so In my learning progress, a pretty important aspect is abstract ability. From specification to abstract.</p>
+</li>
+<li>
+<p>similarity function</p>
+<p>This method is used in style transform, and word embedding. But they are model based learning.</p>
+</li>
+<li>
+<p>data &amp;&amp; algorithm &amp;&amp; iteration</p>
+<p><img src="/images/The_importance_of_data_versus_algorithm.png" alt="The importance of data versus algorithm" /></p>
+<p>what we can know from this picture, just the relationship of data and algorithm, more than this is that we must notice a ting detail, the iteration.</p>
+<p>So what I want to talk about is generalize it to human been,there a lot of people search for a good method then they start to learn, but it is false, if we contrast human’s learning method and trained model weight. we can know even we start from scratch ,we can reach a pretty high performance finally, and in the learning process, we are continue to tweak our learning method to adapt our self, it’s a kind of self optimum.</p>
+<p>What caused most of people failure is the iteration, they haven’t insist on the last.</p>
+</li>
+<li>
+<p>sampling noise and sampling bias</p>
+</li>
+<li>
+<p>Cross validation</p>
+</li>
+</ol>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/fSytzGwwBVw" frameborder="0" loading="lazy" allowfullscreen></iframe></div>
+<hr class="footnotes-sep" />
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><a href="https://github.com/ageron/handson-ml" target="_blank" rel="noopener">tweaked version to adapt google colab from ageron</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Books</category>
+        <category>Hands On Machine Learning with Scikit Learn and TensorFlow</category>
+      </categories>
+      <tags>
+        <tag>machine learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Colab common Command</title>
+    <url>/2020/04/11/Colab-common-Command/</url>
+    <content><![CDATA[<p>download file through wget</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">!wget --no-check-certificate \</span><br><span class="line">https://xxx.xxx.xxx/ \</span><br><span class="line">  -O /content/Glaucoma.zip</span><br></pre></td></tr></table></figure>
+<p>unzip single zipfile</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> zipfile</span><br><span class="line">list = [<span class="string">'Annotation-Training400'</span>]</span><br><span class="line">local_zip = <span class="string">'/content/Glaucoma.zip'</span></span><br><span class="line">zip_ref = zipfile.ZipFile(local_zip, <span class="string">'r'</span>)</span><br><span class="line">zip_ref.extractall(<span class="string">'/content/MNet_DeepCDR/mnet_deep_cdr/_data'</span>)</span><br><span class="line">os.remove(local_zip) <span class="comment"># delete zipped file</span></span><br><span class="line">zip_ref.close()</span><br></pre></td></tr></table></figure>
+<p>unzip all zipfiles</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dir_name = <span class="string">'/content/MNet_DeepCDR/mnet_deep_cdr/_data/Glaucoma'</span></span><br><span class="line">extension = <span class="string">".zip"</span></span><br><span class="line"></span><br><span class="line">os.chdir(dir_name) <span class="comment"># change directory from working dir to dir with files</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> os.listdir(dir_name): <span class="comment"># loop through items in dir</span></span><br><span class="line">    <span class="keyword">if</span> item.endswith(extension): <span class="comment"># check for ".zip" extension</span></span><br><span class="line">        file_name = os.path.abspath(item) <span class="comment"># get full path of files</span></span><br><span class="line">        zip_ref = zipfile.ZipFile(file_name) <span class="comment"># create zipfile object</span></span><br><span class="line">        zip_ref.extractall(dir_name) <span class="comment"># extract file to dir</span></span><br><span class="line">        zip_ref.close() <span class="comment"># close file</span></span><br><span class="line">        os.remove(file_name) <span class="comment"># delete zipped file</span></span><br></pre></td></tr></table></figure>
+<p>get file number in floder</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os, os.path</span><br><span class="line"></span><br><span class="line"><span class="comment">#simple version for working with CWD</span></span><br><span class="line"><span class="comment">#print(len([name for name in os.listdir('.') if os.path.isfile(name)]))</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#path joining version for other paths</span></span><br><span class="line">DIR = <span class="string">'/content/Unet_multiloss/Unet/_data/most_soma_vessel_200/train_data'</span></span><br><span class="line">print(len([name <span class="keyword">for</span> name <span class="keyword">in</span> os.listdir(DIR) <span class="keyword">if</span> os.path.isfile(os.path.join(DIR, name))]))</span><br></pre></td></tr></table></figure>
+<h1 id="show-plot-multi-figure-at-a-time"><a class="markdownIt-Anchor" href="#show-plot-multi-figure-at-a-time"></a> show /plot multi figure at a time</h1>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">f, (ax1,ax2) = plt.subplots(<span class="number">2</span>, <span class="number">1</span>, sharex=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">f.set_figheight(height)</span><br><span class="line">f.set_figwidth(width)</span><br><span class="line"></span><br><span class="line"><span class="comment">#Expectation value</span></span><br><span class="line">ax1.plot([<span class="number">0</span>, toss_times], [heads_proba, heads_proba], <span class="string">"k--"</span>, linewidth=<span class="number">2</span>, label=heads_proba)</span><br><span class="line"><span class="comment">#gussing value</span></span><br><span class="line">ax1.plot([<span class="number">0</span>, toss_times], [guss_proba, guss_proba], <span class="string">"k-"</span>, label=guss_proba)</span><br><span class="line"></span><br><span class="line">ax1.set_xlabel(<span class="string">"Number of coin tosses"</span>)</span><br><span class="line">ax1.set_ylabel(<span class="string">"Heads ratio"</span>)</span><br><span class="line">ax1.legend(loc=<span class="string">"lower right"</span>)</span><br><span class="line">ax1.axis([<span class="number">0</span>, toss_times, guss_proba-Epsilon, guss_proba+Epsilon])</span><br><span class="line">save_fig(<span class="string">"law_of_large_numbers_plot"</span>)</span><br><span class="line">ax1.plot(cumulative_heads_ratio)</span><br><span class="line"></span><br><span class="line">law_of_large_number = np.cumsum(cumulative_heads_ratio&gt;threshold,axis=<span class="number">0</span>)/np.arange(<span class="number">1</span>, toss_times+<span class="number">1</span>).reshape(<span class="number">-1</span>, <span class="number">1</span>)</span><br><span class="line">ax2.set_ylabel(<span class="string">"The probability of obtaining a majority of heads"</span>)</span><br><span class="line">ax2.axis([<span class="number">0</span>, toss_times, <span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line">ax2.plot(law_of_large_number)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="for-enumerate"><a class="markdownIt-Anchor" href="#for-enumerate"></a> for enumerate</h1>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> idx,ax_i <span class="keyword">in</span> enumerate(ax):</span><br><span class="line">  ax_i.imshow(img[:,:,idx])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Google Colab</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>CHAPTER 7 Ensemble Learning and Random Forests</title>
+    <url>/2020/04/05/Ensemble-Learning-and-Random-Forests/</url>
+    <content><![CDATA[<div class="note default">
+            <h2 id="pdf"><a class="markdownIt-Anchor" href="#pdf"></a> PDF</h2>
+          </div>
+<div class="pdfobject-container" data-target="/uploads/Ensemble Learning and Random Forests.pdf" data-height="500px"></div>
+<a id="more"></a>
+<div class="note default">
+            <h2 id="voting-classifier"><a class="markdownIt-Anchor" href="#voting-classifier"></a> Voting Classifier</h2>
+          </div>
+<h3 id="keypoint"><a class="markdownIt-Anchor" href="#keypoint"></a> Keypoint</h3>
+<ul>
+<li>as soon as possible to train independent classifiers,otherwise they will make the same error</li>
+<li>make sure not to train on the same data. furthermore not train on the same distribution’s data</li>
+<li>to train them using very different algorithm</li>
+<li>let them make very different types of errors.</li>
+</ul>
+<h3 id="main-idea"><a class="markdownIt-Anchor" href="#main-idea"></a> Main idea</h3>
+<blockquote class="blockquote-center">
+            <i class="fa fa-quote-left"></i>
+            <p>The law of large number definition6.2.1<br />
+<img src="/images/The%20law%20of%20large%20number%20definition6.2.1.png" class="[The law of large number definition6.2.1]" title="Probability and statistics Fourth Edition" alt="Probability and statistics Fourth Edition"></p>
+
+            <i class="fa fa-quote-right"></i>
+          </blockquote>
+<h3 id="combine-original-text"><a class="markdownIt-Anchor" href="#combine-original-text"></a> Combine original text</h3>
+<p>The probability of single classifier is barely better than random guessing,but what we focused isn’t the the classifier’s precision.Nevertheless we focused on the truth that the classifier is bit lead to expected result than the other one, when we sample thoundsands classifiers and then the frequency of barely expected results is much close to 1.</p>
+<p><img src="/images/Number_of_coin_tosses.png" alt="number of coin tosses" title="number of coin tosses" /></p>
+<h3 id="code-analysis"><a class="markdownIt-Anchor" href="#code-analysis"></a> Code analysis</h3>
+<p>change how your Python module is parsed<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
+<figure class="highlight python"><figcaption><span>_.compact</span><a href="http://underscorejs.org/#compact" target="_blank" rel="noopener">import</a></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">#To support both python 2 and python 3</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> division, print_function, unicode_literals</span><br></pre></td></tr></table></figure>
+<p>np lib is for create matrix,or generate random number,os lib is for python to operate path,and matplotlib is used to plot math function.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#Common imports</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="comment">#to make this notebook's output stable across runs</span></span><br><span class="line">np.random.seed(<span class="number">42</span>)</span><br><span class="line"><span class="keyword">import</span> os.path  </span><br><span class="line"><span class="comment"># To plot pretty figures</span></span><br><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br></pre></td></tr></table></figure>
+<p>rc is abbreviation of runtime configuration<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">mpl.rc(<span class="string">'axes'</span>, labelsize=<span class="number">14</span>) <span class="comment"># = rcParams['axes.linewidth'] = 14</span></span><br><span class="line">mpl.rc(<span class="string">'xtick'</span>, labelsize=<span class="number">12</span>)<span class="comment"># = rcParams['xtick.labelsize']=12</span></span><br><span class="line">mpl.rc(<span class="string">'ytick'</span>, labelsize=<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
+<p>create two help function for save img</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#Where to save the figures</span></span><br><span class="line">PROJECT_ROOT_DIR = <span class="string">"."</span></span><br><span class="line">CHAPTER_ID = <span class="string">"ensembles"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">image_path</span><span class="params">(fig_id)</span>:</span></span><br><span class="line">    path = os.path.join(PROJECT_ROOT_DIR, <span class="string">""</span>, CHAPTER_ID)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.isdir(path):</span><br><span class="line">      os.mkdir(path)</span><br><span class="line">    <span class="keyword">return</span> os.path.join(path,fig_id)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_fig</span><span class="params">(fig_id, tight_layout=True)</span>:</span></span><br><span class="line">    print(<span class="string">"Saving figure"</span>, fig_id)</span><br><span class="line">    <span class="keyword">if</span> tight_layout:</span><br><span class="line">        plt.tight_layout()</span><br><span class="line">    plt.savefig(image_path(fig_id) + <span class="string">".png"</span>, format=<span class="string">'png'</span>, dpi=<span class="number">300</span>)</span><br></pre></td></tr></table></figure>
+<p>difine some variable</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">Expectation  = <span class="number">0.51</span></span><br><span class="line">heads_proba = Expectation</span><br><span class="line">Epsilon = <span class="number">0.08</span></span><br><span class="line">guss_proba = <span class="number">0.50</span></span><br><span class="line">toss_times = <span class="number">100000</span></span><br><span class="line">predictor_num = <span class="number">15</span></span><br></pre></td></tr></table></figure>
+<p>start toss</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">coin_tosses = (np.random.rand(toss_times, predictor_num) &lt; heads_proba).astype(np.int32) <span class="comment"># 0,1,0,1 sequences</span></span><br></pre></td></tr></table></figure>
+<p>make cumulative sum<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup> and reshape automatically<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">cumulative_heads_ratio = np.cumsum(coin_tosses, axis=<span class="number">0</span>) / np.arange(<span class="number">1</span>, toss_times+<span class="number">1</span>).reshape(<span class="number">-1</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>Open two subplot<sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup> wich sharing x axis.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f, (ax1,ax2) = plt.subplots(<span class="number">2</span>, <span class="number">1</span>, sharex=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p>set plot size(whole subplot)<sup class="footnote-ref"><a href="#fn6" id="fnref6">[6]</a></sup></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f.set_figheight(<span class="number">10</span>)</span><br><span class="line">f.set_figwidth(<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+<p>drawing baseline respective for guess and expectation.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#Expectation value</span></span><br><span class="line">ax1.plot([<span class="number">0</span>, toss_times], [heads_proba, heads_proba], <span class="string">"k--"</span>, linewidth=<span class="number">2</span>, label=heads_proba)</span><br><span class="line"><span class="comment">#gussing value</span></span><br><span class="line">ax1.plot([<span class="number">0</span>, toss_times], [guss_proba, guss_proba], <span class="string">"k-"</span>, label=guss_proba)</span><br></pre></td></tr></table></figure>
+<p>plot head ration<sup class="footnote-ref"><a href="#fn7" id="fnref7">[7]</a></sup></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ax1.set_xlabel(<span class="string">"Number of coin tosses"</span>)</span><br><span class="line">ax1.set_ylabel(<span class="string">"Heads ratio"</span>)</span><br><span class="line">ax1.legend(loc=<span class="string">"lower right"</span>)</span><br><span class="line">ax1.axis([<span class="number">0</span>, toss_times, guss_proba-Epsilon, guss_proba+Epsilon])</span><br><span class="line">save_fig(<span class="string">"law_of_large_numbers_plot"</span>)</span><br><span class="line">ax1.plot(cumulative_heads_ratio)</span><br></pre></td></tr></table></figure>
+<p>plot the probability of obtaining a majority of heads</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">law_of_large_number = np.cumsum(cumulative_heads_ratio&gt;<span class="number">0.5</span>,axis=<span class="number">0</span>)/np.arange(<span class="number">1</span>, toss_times+<span class="number">1</span>).reshape(<span class="number">-1</span>, <span class="number">1</span>)</span><br><span class="line">ax2.set_ylabel(<span class="string">"The probability of obtaining a majority of heads"</span>)</span><br><span class="line">ax2.axis([<span class="number">0</span>, toss_times, <span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line">ax2.plot(law_of_large_number)</span><br></pre></td></tr></table></figure>
+<p>after toss 990000</p>
+<p><img src="/images/Number_of_coin_tosses_990000.png" alt="result_Number_of_coin_tosses_990000.png" title="number of coin tosses" /></p>
+<h3 id="prerequisite"><a class="markdownIt-Anchor" href="#prerequisite"></a> Prerequisite</h3>
+<p>The assume criterion must low than the Expectation value,other wise the the result will not converge to 1<br />
+<a href="#converge-1">criterion == guess == 0.34 == expectation = 0.34</a><br />
+<a href="#converge-2">criterion == guess == 0.34 &lt; expectation  = 0.35</a><br />
+<a href="#converge-3">criterion == guess == 0.34 &gt; expectation  = 0.33</a></p>
+<div class="tabs" id="converge"><ul class="nav-tabs"><li class="tab active"><a href="#converge-1">criterion == expectation</a></li><li class="tab"><a href="#converge-2">criterion < expectation</a></li><li class="tab"><a href="#converge-3">criterion > expectation</a></li></ul><div class="tab-content"><div class="tab-pane active" id="converge-1"><p><img src="/images/criterion_eq_expectation.png" alt="c_eq_e" /></p></div><div class="tab-pane" id="converge-2"><p><img src="/images/criterion_lessthan_expectation.png" alt="c_lessthan_e" /></p></div><div class="tab-pane" id="converge-3"><p><img src="/images/criterion_bigthan_expectation.png" alt="c_bigthan_e" /></p></div></div></div>
+<p>We can conclude that the most critical relation is none about the guess probability,nevertheless it’s deceided by  and criterion</p>
+<h3 id="run-code-oneline"><a class="markdownIt-Anchor" href="#run-code-oneline"></a> Run code oneline</h3>
+<p>directly run in <a href="https://colab.research.google.com/drive/1I-LWyYq4-vBPUa-bhjPCF_oSBeyKeG33" target="_blank" rel="noopener">google colab</a>,forked from ageron<sup class="footnote-ref"><a href="#fn8" id="fnref8">[8]</a></sup>, but add some vision features and fixed path problem to adapt google colab.</p>
+<p>unfinished part<sup class="footnote-ref"><a href="#fn9" id="fnref9">[9]</a></sup>:</p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        unfinished part
+    </div>
+    <div class='spoiler-content'>
+        <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">## Bagging and Pasting</span><br><span class="line"></span><br><span class="line">### Bagging and Pasting in Scikit-Learn </span><br><span class="line"></span><br><span class="line">### Out-of-Bag Evaluation</span><br><span class="line"></span><br><span class="line">## Random Patches and Random Subspaces</span><br><span class="line"></span><br><span class="line">## Random Forests</span><br><span class="line"></span><br><span class="line">### Extra-Trees</span><br><span class="line"></span><br><span class="line">### Feature Importance</span><br><span class="line"></span><br><span class="line">## Boosting</span><br><span class="line"></span><br><span class="line">### AdaBoost</span><br><span class="line"></span><br><span class="line">### Gradient Boosting</span><br><span class="line"></span><br><span class="line">## Stacking</span><br><span class="line"></span><br><span class="line">## Exercises</span><br></pre></td></tr></table></figure>
+    </div>
+</div>
+<div class="note default">
+            <!--more--><h2 id="comprehension"><a class="markdownIt-Anchor" href="#comprehension"></a> Comprehension</h2>
+          </div>
+<h3 id="blind-men-and-an-elephant"><a class="markdownIt-Anchor" href="#blind-men-and-an-elephant"></a> Blind men and an elephant</h3>
+<p>First, we talk about an ancient parable <a href="https://en.wikipedia.org/wiki/Blind_men_and_an_elephant" target="_blank" rel="noopener">Blind men and an elephant</a></p>
+<blockquote class="blockquote-center">
+            <i class="fa fa-quote-left"></i>
+            <p>A group of blind men heard that a strange animal, called an elephant, had been brought to the town, but none of them were aware of its shape and form. Out of curiosity, they said: “We must inspect and know it by touch, of which we are capable”. So, they sought it out, and when they found it they groped about it. In the case of the first person, whose hand landed on the trunk, said “This being is like a thick snake”. For another one whose hand reached its ear, it seemed like a kind of fan. As for another person, whose hand was upon its leg, said, the elephant is a pillar like a tree-trunk. The blind man who placed his hand upon its side said the elephant, “is a wall”. Another who felt its tail, described it as a rope. The last felt its tusk, stating the elephant is that which is hard, smooth and like a spear.</p>
+
+            <i class="fa fa-quote-right"></i>
+          </blockquote>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Blind_men_and_elephant3.jpg" alt="File:Blind_men_and_elephant3" /></p>
+<h4 id="read-the-story-again"><a class="markdownIt-Anchor" href="#read-the-story-again"></a> Read the story again</h4>
+<ul>
+<li>The situation is <span class="label primary">blind man</span> to recognize this <span class="label primary">stange animal</span>.</li>
+<li>The <span class="label primary">manner</span> that they  to recognize is  <span class="label primary">touch</span>.</li>
+<li>The initial <span class="label primary">memory</span> about this stange animal is <span class="label primary">none</span>.
+<ul>
+<li>The first <span class="label success">person</span> groped its <span class="label info">trunk</span> ,then he pridicts it as an thick <span class="label warning">snake</span>.</li>
+<li>The second <span class="label success">person</span> groped its <span class="label info">ear</span>,then he pridicts it as a kind of <span class="label warning">fan</span>.</li>
+<li>The third <span class="label success">person</span> groped its <span class="label info">leg</span>,then he pridicts it as a <span class="label warning">tree-trunk</span>.</li>
+<li>The fourth <span class="label success">person</span> groped its <span class="label info">side</span>,then he prdicts it as a <span class="label warning">wall</span>.</li>
+<li>The fifth <span class="label success">person</span> groped its <span class="label info">tail</span>,then he pridicts it as a <span class="label warning">rope</span>.</li>
+<li>The last <span class="label success">person</span> groped its <span class="label info">tusk</span>,then he pridicts it as a <span class="label warning">spere</span>.</li>
+</ul>
+</li>
+</ul>
+<p>But if we gattered them pricits, we will get a much better predict about how does the elephant look like.</p>
+<h4 id="tweak-the-story"><a class="markdownIt-Anchor" href="#tweak-the-story"></a> Tweak the story</h4>
+<ul>
+<li>The situation is <span class="label primary">precitor</span> to recognize this <span class="label primary">training dataset</span>.</li>
+<li>The <span class="label primary">manner</span> that they  to recognize is  <span class="label primary">fitting model</span>.</li>
+<li>The initial <span class="label primary">trained weights</span> about this dataset is <span class="label primary">none</span>.
+<ul>
+<li>The first <span class="label success">precitor</span> fit on <span class="label info">subset 1 of training dataset</span> ,then he pridicts it as an thick <span class="label warning">snake</span>.</li>
+<li>The second <span class="label success">precitor</span> fit on <span class="label info">subset 2 of training dataset</span>,then he pridicts it as a kind of <span class="label warning">fan</span>.</li>
+<li>The third <span class="label success">precitor</span> fit on <span class="label info">subset 3 of training dataset</span>,then he pridicts it as a <span class="label warning">tree-trunk</span>.</li>
+<li>The fourth <span class="label success">precitor</span> fit on <span class="label info">subset 4 of training dataset</span>,then he prdicts it as a <span class="label warning">wall</span>.</li>
+<li>The fifth <span class="label success">precitor</span> fit on <span class="label info">subset 5 of training dataset</span>,then he pridicts it as a <span class="label warning">rope</span>.</li>
+<li>The last <span class="label success">precitor</span> fit on <span class="label info">subset 6 of training dataset</span>,then he pridicts it as a <span class="label warning">spere</span>.</li>
+</ul>
+</li>
+</ul>
+<p>But if we simply sum these result,we can get a much better performance with it.</p>
+<hr />
+<h4 id="prerequisites"><a class="markdownIt-Anchor" href="#prerequisites"></a> Prerequisites</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Story</th>
+<th style="text-align:center">Task</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">The elephant is a real elephant, not a dog or cat.</td>
+<td style="text-align:center">the gourd truth[<strong>GT</strong>] is none error in it.</td>
+</tr>
+<tr>
+<td style="text-align:center">The error is comes from misunderstand</td>
+<td style="text-align:center">the model is underfitting.</td>
+</tr>
+<tr>
+<td style="text-align:center">Each person only recognized partial of the elephant</td>
+<td style="text-align:center">Each predictor is trained at subset dataset</td>
+</tr>
+</tbody>
+</table>
+<h4 id="advantage-than-single-personpridictor"><a class="markdownIt-Anchor" href="#advantage-than-single-personpridictor"></a> Advantage than single person/pridictor</h4>
+<ul>
+<li>parallel mission, more efficient.</li>
+<li>more comprehensive information</li>
+<li>more close to the truth.</li>
+</ul>
+<p>The third point of multi-predictor is more close to truth is due to each predecessor has refined the origin dataset,and extract more useful feature correlated to the judgments based,and deprecat the rest of uncorrelated feature.Based on these information, we can make a better precition.Furthermore we can use these new feature to train a new model rather than simply sum them,and that may give us a better prediction.</p>
+<h3 id="bad-advice-versus-handcraft-mislabel"><a class="markdownIt-Anchor" href="#bad-advice-versus-handcraft-mislabel"></a> Bad advice versus handcraft mislabel</h3>
+<p>Let’s talk about a satuation,the suject is you.One day,you want to learn machine learning, and asked thousands of random people,different people give different advice.</p>
+<ul>
+<li>The first people told you machince learning need a good mathmatical basics, otherwise you can’t make sense anthing.</li>
+<li>The second people told you can learn from scratch even you have no basic in it before.</li>
+<li>The third people told you can use Coursera to learn ML.</li>
+<li>The fouth told you hurry give up,it’s unpossible to learn it by your condition.</li>
+<li>some people told you needn’t prepare a good mathmatics as prerequisite,just figure out some detail when you come across it.</li>
+<li>some people  mook you such ignorance.<br />
+…<br />
+Look there are lots of advice, does all of them be a good advice,the answer is NO!But more important thing is finally we still can reach the correct direction, even there much misleading in it.we still can figure out how to learn machine learning.</li>
+</ul>
+<p>But the question is how we did it?</p>
+<p>if we can figure out how we learn some thing from misleading information,then we can train our model in a mislabeled dataset,as I think.</p>
+<p>According my comprehension,the reason is two aspect</p>
+<ol>
+<li>inspiration</li>
+<li>the misleading advice/mislabel dataset is positive correlation to the important advice/feature</li>
+</ol>
+<p><strong>Why do people discourage others?</strong><sup class="footnote-ref"><a href="#fn10" id="fnref10">[10]</a></sup></p>
+<blockquote><ul>
+<li><strong>1) They can’t do what you want to do:</strong><br />
+If i believe that i can’t succeed then i will assume that other people won’t be able to succeed as well unless they are <a href="https://www.2knowmyself.com/does_luck_has_anything_to_do_with_success" target="_blank" rel="noopener">lucky</a>. Now when i meet an enthusiastic person who claims that he can succeed i will certainly try to infect him with my <a href="https://www.2knowmyself.com/how_limiting_beliefs_are_created" target="_blank" rel="noopener">negative beliefs</a>.</li>
+<li><strong>2) They were threatened by you:</strong><br />
+Some people feel threatened whenever they find anybody trying to do something that they never dared to do. If someone always wanted to be rich but never dared to start a <a href="https://www.2knowmyself.com/how_to_start_a_successful_business_from_scratch" target="_blank" rel="noopener">private business</a> then he will feel threatened if he found you taking this step. In such a case this person might put you down just to make sure that you won’t bypass him and become better than him</li>
+<li><strong>3) They are jealous:</strong><br />
+Believe it or not, a close friend may try to discourage you just because he is <a href="https://www.2knowmyself.com/how_to_identify_jealous_people" target="_blank" rel="noopener">jealous</a> of you. If you are getting more attention than him or if he feels incompetent compared to you then he might put you down just because he feels jealous</li>
+<li><strong>4) He is afraid:</strong><br />
+When i proposed my first book to the owner of a publishing house back in 2006 the man refused to publish it claiming that he only publishes books about politics. Later on when i sold more than 1 million worth of copies (see <a href="https://www.2knowmyself.com/Making_money_from_the_internet" target="_blank" rel="noopener">How i did it</a>) i realized that the man was just afraid to take the risk because i seemed young and so he chose to put me down</li>
+<li><strong>5) They hate you:</strong> If a person hates you he wont want to see you succeeding at anything and that’s why he will try to discourage you whenever he gets the chance. Beware of enemies who come disguised as friends (see <a href="https://www.2knowmyself.com/how_to_deal_with_someone_who_hates_you_at_work" target="_blank" rel="noopener">Dealing with people who hate you at work</a>)</li>
+<li><strong>6) They are not well informed:</strong><br />
+Many people hate to say “I don’t know” when they are asked about something. When people lack sufficient knowledge about what you are planning to do they might put you down just not to say “I don’t know”</li>
+<li><strong>7) They can’t see the full picture:</strong> some people will put you down just because they can’t see the full picture you saw. Those people might have good intentions but in the end they will do the same harm that others who bad intentions did</li>
+</ul>
+<footer><strong>By M.Farouk Radwan, MSc</strong><cite><a href="https://www.2knowmyself.com/why_do_people_discourage_others" target="_blank" rel="noopener">Why do people discourage others</a></cite></footer></blockquote>
+<hr />
+<h4 id="so-we-can-take-such-manner-to-treat-these-information"><a class="markdownIt-Anchor" href="#so-we-can-take-such-manner-to-treat-these-information"></a> So we can take such manner to treat these information</h4>
+<ul>
+<li>You can’t do it,it’s impossible. means <strong>You can do it</strong>.</li>
+<li>You can’t learn machine learning forever,because you such bad in math. means <strong>as long as you improve you math,you can do a pretty good job in it,Go,GO,GO!!!</strong></li>
+</ul>
+<p>Does these make much sense?</p>
+<h4 id="back-to-our-mislabeled-dataset"><a class="markdownIt-Anchor" href="#back-to-our-mislabeled-dataset"></a> Back to our mislabeled dataset</h4>
+<p>Let me ask you some question,what’s the reason of mislabel?</p>
+<ul>
+<li>Due to these parts is more important than others.</li>
+<li>These features are more easy to make fault even for human.</li>
+<li>These part is what we called “Vehicle blind spot”.</li>
+</ul>
+<p>we can’t realize each part of the reason why human make fault,but we can just put these to a Neural Network and let it figure out the reason.</p>
+<p>What’s the target  of training model?</p>
+<ul>
+<li>we want to extract the most import,or most correlated feature.</li>
+</ul>
+<p>These mislabel feature told model which part is more important, if we can just penalize these feature’s weight and argument the opposite feature(if we can do it).</p>
+<h2 id="appendix"><a class="markdownIt-Anchor" href="#appendix"></a> Appendix</h2>
+<p><a href="https://github.com/theme-next/hexo-theme-next/issues/716" target="_blank" rel="noopener">NexT.Pisces v7.0.1 seems not support Markdown Footnotes</a></p>
+<p><a href="https://github.com/theme-next/hexo-theme-next/pull/56" target="_blank" rel="noopener">Add pangu support</a></p>
+<p><a href="https://github.com/theme-next/hexo-theme-next/issues/517" target="_blank" rel="noopener">Can footnotes be integrated into Next | 引用链接效果做成像论文那样 #517</a></p>
+<p><s><a href="https://www.npmjs.com/package/hexo-footnotes" target="_blank" rel="noopener">https://www.npmjs.com/package/hexo-footnotes</a></s></p>
+<p><s><a href="https://www.markdownguide.org/extended-syntax/#fnref:1" target="_blank" rel="noopener">markdown footnote</a></s></p>
+<p><a href="https://karellincoln.github.io/2018/04/04/hexo-new-customization/" target="_blank" rel="noopener">Strikethrough</a></p>
+<p><a href="https://hexo.io/docs/tag-plugins#Examples-1" target="_blank" rel="noopener">how to use codeblock tag-plugins</a></p>
+<hr class="footnotes-sep" />
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><a href="https://stackoverflow.com/questions/7075082/what-is-future-in-python-used-for-and-how-when-to-use-it-and-how-it-works" target="_blank" rel="noopener">What is <strong>future</strong> in Python used for and how/when to use it, and how it works</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p><a href="https://matplotlib.org/3.2.1/tutorials/introductory/customizing.html#a-sample-matplotlibrc-file" target="_blank" rel="noopener">runtime configuration file</a> <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.cumsum.html" target="_blank" rel="noopener">cumulative sum</a> <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn4" class="footnote-item"><p><a href="https://www.youtube.com/watch?v=3wi0lJPfLUY" target="_blank" rel="noopener">-1 in reshape</a> <a href="#fnref4" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn5" class="footnote-item"><p><a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" target="_blank" rel="noopener">subplot in matplotlib</a> <a href="#fnref5" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn6" class="footnote-item"><p><a href="https://stackoverflow.com/questions/14770735/how-do-i-change-the-figure-size-with-subplots" target="_blank" rel="noopener">how to set picture size when we use subplot</a> <a href="#fnref6" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn7" class="footnote-item"><p><a href="https://stackoverflow.com/questions/38662667/matplotlib-and-subplots-properties" target="_blank" rel="noopener">how to set subplot title</a> <a href="#fnref7" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn8" class="footnote-item"><p><a href="(https://github.com/ageron/handson-ml.git)">ageron github</a> <a href="#fnref8" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn9" class="footnote-item"><p><a href="https://github.com/theme-next/hexo-theme-next/issues/200" target="_blank" rel="noopener">Feature request: fold the code [solved] </a> <a href="#fnref9" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn10" class="footnote-item"><p><a href="https://www.2knowmyself.com/why_do_people_discourage_others" target="_blank" rel="noopener">Why do people discourage others?</a> <a href="#fnref10" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Books</category>
+        <category>Hands On Machine Learning with Scikit Learn and TensorFlow</category>
+      </categories>
+      <tags>
+        <tag>machine learning</tag>
+        <tag>supervised learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Fully Convolutional Networks for Semantic Segmentation</title>
+    <url>/2020/04/22/Fully-Convolutional-Networks-for-Semantic-Segmentation/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/Fully Convolutional Networks for Semantic Segmentation.pdf" data-height="500px"></div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>ReadingPaper</category>
+      </categories>
+      <tags>
+        <tag>Semantic Segmentation</tag>
+        <tag>Convolutional Network</tag>
+        <tag>Deep Learning</tag>
+        <tag>Transfer Learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ImageNet Classification with Deep Convolutional</title>
+    <url>/2020/04/22/ImageNet-Classification-with-Deep-Convolutional/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/AlexNet.pdf" data-height="500px"></div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>ReadingPaper</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Joint Optic Disc and Cup Segmentation Based on Multi-label Deep Network and Polar Transformation</title>
+    <url>/2020/04/05/Joint-Optic-Disc-and-Cup-Segmentation-Based-on-Multi-label-Deep-Network-and-Polar-Transformation/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/Joint Optic Disc and Cup Segmentation Based on_yuhang.review.pdf" data-height="500px"></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>ReadingPaper</category>
+        <category>OCR</category>
+        <category>Convlution Neural Network</category>
+        <category>Sementic Segmemtation</category>
+        <category>Object Dectection</category>
+      </categories>
+      <tags>
+        <tag>Convlution Neural Network</tag>
+        <tag>tensorflow</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Man is to Computer Programmer as Woman is to Homemaker?</title>
+    <url>/2020/04/19/Man-is-to-Computer-Programmer-as-Woman-is-to-Homemaker/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/Man is to Computer Programmer as Woman is to Homemaker.pdf" data-height="500px"></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>ReadingPaper</category>
+      </categories>
+      <tags>
+        <tag>word embeddings</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PCA-aided Fully Convolutional Networks for Semantic Segmentation of Multi-channel fMRI</title>
+    <url>/2020/04/20/PCA-aided%20Fully%20Convolutional%20Networks%20for%20Semantic%20Segmentation%20of%20Multi-channel%20fMRI/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/PCA-aided Fully Convolutional Networks for Semantic Segmentation of Multi-channel fMRI.pdf" data-height="500px"></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>ReadingPaper</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Sample and Sampling distribution</title>
+    <url>/2020/04/10/Sample-and-Sampling-distribution/</url>
+    <content><![CDATA[<a id="more"></a>
+<div class="note default">
+            <h3 id="常用统计量"><a class="markdownIt-Anchor" href="#常用统计量"></a> 常用统计量</h3>
+          </div>
+<p>sample mean:</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mi>X</mi><mo stretchy="true">‾</mo></mover><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>X</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\overline X = \frac{1}{n}\sum_{i=1}^{n}X_i
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8833300000000001em;vertical-align:0em;"></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8833300000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span><span style="top:-3.80333em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.929066em;vertical-align:-1.277669em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">n</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6513970000000002em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<p>未修正的样本方差:</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>S</mi><mn>0</mn><mn>2</mn></msubsup><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mo stretchy="false">(</mo><msub><mi>X</mi><mi>i</mi></msub><mo>−</mo><mover accent="true"><mi>X</mi><mo stretchy="true">‾</mo></mover><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">S_0^2 = \frac{1}{n}\sum_{i=1}^{n}(X_i-\overline X)^2
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1111079999999998em;vertical-align:-0.247em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-2.4530000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.929066em;vertical-align:-1.277669em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">n</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6513970000000002em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.13333em;vertical-align:-0.25em;"></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8833300000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span><span style="top:-3.80333em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p>样本方差:</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>S</mi><mn>2</mn></msup><mo>=</mo><mfrac><mn>1</mn><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mo stretchy="false">(</mo><msub><mi>X</mi><mi>i</mi></msub><mo>−</mo><mover accent="true"><mi>X</mi><mo stretchy="true">‾</mo></mover><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">S^2=\frac{1}{n-1}\sum_{i=1}^{n}(X_i-\overline X)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8641079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.929066em;vertical-align:-1.277669em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6513970000000002em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.13333em;vertical-align:-0.25em;"></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8833300000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span><span style="top:-3.80333em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></p>
+<p>样本的K阶原点矩:</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>A</mi><mi>k</mi></msub><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msubsup><mi>X</mi><mi>i</mi><mi>k</mi></msubsup><mo stretchy="false">(</mo><mi mathvariant="normal">一</mi><mi mathvariant="normal">阶</mi><mi mathvariant="normal">原</mi><mi mathvariant="normal">点</mi><mi mathvariant="normal">矩</mi><mi mathvariant="normal">就</mi><mi mathvariant="normal">是</mi><mi mathvariant="normal">均</mi><mi mathvariant="normal">值</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">A_k= \frac{1}{n}\sum_{i=1}^{n}X_i^k
+(一阶原点矩就是均值)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.929066em;vertical-align:-1.277669em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">n</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6513970000000002em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8991079999999998em;"><span style="top:-2.4530000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord cjk_fallback">一</span><span class="mord cjk_fallback">阶</span><span class="mord cjk_fallback">原</span><span class="mord cjk_fallback">点</span><span class="mord cjk_fallback">矩</span><span class="mord cjk_fallback">就</span><span class="mord cjk_fallback">是</span><span class="mord cjk_fallback">均</span><span class="mord cjk_fallback">值</span><span class="mclose">)</span></span></span></span></span></p>
+<p>样本K阶中心距:</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>B</mi><mi>k</mi></msub><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mo stretchy="false">(</mo><msub><mi>X</mi><mi>i</mi></msub><mo>−</mo><mover accent="true"><mi>X</mi><mo stretchy="true">‾</mo></mover><msup><mo stretchy="false">)</mo><mi>k</mi></msup><mo stretchy="false">(</mo><mi mathvariant="normal">二</mi><mi mathvariant="normal">阶</mi><mi mathvariant="normal">中</mi><mi mathvariant="normal">心</mi><mi mathvariant="normal">矩</mi><mi mathvariant="normal">就</mi><mi mathvariant="normal">是</mi><mi mathvariant="normal">未</mi><mi mathvariant="normal">修</mi><mi mathvariant="normal">正</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">样</mi><mi mathvariant="normal">本</mi><mi mathvariant="normal">方</mi><mi mathvariant="normal">差</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">B_k = \frac{1}{n}\sum_{i=1}^{n}(X_i-\overline X)^k
+(二阶中心矩就是未修正的样本方差)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.05017em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.929066em;vertical-align:-1.277669em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">n</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6513970000000002em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.149108em;vertical-align:-0.25em;"></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8833300000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span><span style="top:-3.80333em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord cjk_fallback">二</span><span class="mord cjk_fallback">阶</span><span class="mord cjk_fallback">中</span><span class="mord cjk_fallback">心</span><span class="mord cjk_fallback">矩</span><span class="mord cjk_fallback">就</span><span class="mord cjk_fallback">是</span><span class="mord cjk_fallback">未</span><span class="mord cjk_fallback">修</span><span class="mord cjk_fallback">正</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">样</span><span class="mord cjk_fallback">本</span><span class="mord cjk_fallback">方</span><span class="mord cjk_fallback">差</span><span class="mclose">)</span></span></span></span></span></p>
+<p>协方差:</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>S</mi><mn>12</mn></msub><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><mo>∑</mo><mo stretchy="false">(</mo><msub><mi>X</mi><mi>i</mi></msub><mo>−</mo><mover accent="true"><mi>X</mi><mo stretchy="true">‾</mo></mover><mo stretchy="false">)</mo><mo stretchy="false">(</mo><msub><mi>Y</mi><mi>i</mi></msub><mo>−</mo><mover accent="true"><mi>Y</mi><mo stretchy="true">‾</mo></mover><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">S_{12}=\frac{1}{n}\sum(X_i - \overline X)(Y_i-\overline Y)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.00744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">n</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-symbol large-op" style="position:relative;top:-0.000004999999999977245em;">∑</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.13333em;vertical-align:-0.25em;"></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8833300000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span><span style="top:-3.80333em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span><span class="mclose">)</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.22222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.13333em;vertical-align:-0.25em;"></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8833300000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span></span><span style="top:-3.80333em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></p>
+<p>相关系数:</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mo>=</mo><mfrac><msub><mi>S</mi><mn>12</mn></msub><mrow><msub><mi>S</mi><mn>1</mn></msub><mo>∗</mo><msub><mi>S</mi><mn>2</mn></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">R=\frac{S_{12}}{S_1*S_2}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.19633em;vertical-align:-0.8360000000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.3139999999999996em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8360000000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<div class="note default">
+            <h3 id="样本均值和样本方差的性质"><a class="markdownIt-Anchor" href="#样本均值和样本方差的性质"></a> 样本均值和样本方差的性质</h3>
+          </div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Probability and Statistics</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>U-Net: Convolutional Networks for Biomedical</title>
+    <url>/2020/04/09/U-Net-Convolutional-Networks-for-Biomedical/</url>
+    <content><![CDATA[<div class="note default">
+            <h2 id="pdf"><a class="markdownIt-Anchor" href="#pdf"></a> PDF</h2>
+          </div>
+<div class="pdfobject-container" data-target="/uploads/1505.04597.pdf" data-height="500px"></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>ReadingPaper</category>
+        <category>Caffe</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>UML Practice Tutorial Chapter 1 UML Overview</title>
+    <url>/2020/04/27/UML%20Practice%20Tutorial%20Chapter%201%20UML%20Overview/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/UML Practical Tutorial/UML practical tutorial1_uml_overview.pdf" data-height="1024px"></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Books</category>
+        <category>UML Practice Tutorial</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>UML Practice Tutorial Chapter 8 Active Diagram</title>
+    <url>/2020/04/30/UML%20Practice%20Tutorial%20Chapter%208%20Active%20Diagram/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/UML Practical Tutorial/UML practical tutorial8_active_diagram.pdf" data-height="1024px"></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Books</category>
+        <category>UML Practice Tutorial</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>UML Practice Tutorial Chapter 2 UML System</title>
+    <url>/2020/04/30/UML-Practice-Tutorial-Chapter-2-UML-System/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/UML Practical Tutorial/UML practical tutorial2_uml_system.pdf" data-height="1024px"></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Books</category>
+        <category>UML Practice Tutorial</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>UML Practice Tutorial Chapter 3 CLass Diagram</title>
+    <url>/2020/04/30/UML-Practice-Tutorial-Chapter-3-CLass-Diagram/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/UML Practical Tutorial/UML practical tutorial3_class_diagram.pdf" data-height="1024px"></div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Books</category>
+        <category>UML Practice Tutorial</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>UML Practice Tutorial Chapter 4 Object Diagram</title>
+    <url>/2020/04/30/UML-Practice-Tutorial-Chapter-4-Object-Diagram/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/UML Practical Tutorial/UML practical tutorial4_object_diagram.pdf" data-height="1024px"></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Books</category>
+        <category>UML Practice Tutorial</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>UML Practice Tutorial Chapter 5 Package Diagram</title>
+    <url>/2020/04/30/UML-Practice-Tutorial-Chapter-5-Package-Diagram/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/UML Practical Tutorial/UML practical tutorial5_package_diagram.pdf" data-height="1024px"></div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Books</category>
+        <category>UML Practice Tutorial</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>UML Practice Tutorial Chapter 7 Interactive Diagram</title>
+    <url>/2020/04/30/UML-Practice-Tutorial-Chapter-7-Interactive-Diagram/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/UML Practical Tutorial/UML practical tutorial7_interactive_diagram.pdf" data-height="1024px"></div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Books</category>
+        <category>UML Practice Tutorial</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>UML Practice Tutorial Chapter 6 UseCase Diagram</title>
+    <url>/2020/04/30/UML-Practice-Tutorial-Chapter-6-UseCase-Diagram/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/UML Practical Tutorial/UML practical tutorial6_usecase_diagram.pdf" data-height="1024px"></div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Books</category>
+        <category>UML Practice Tutorial</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>YouTube Recommend</title>
+    <url>/2020/04/09/YouTube-Recommend/</url>
+    <content><![CDATA[<a id="more"></a>
+<h3 id="about-love"><a class="markdownIt-Anchor" href="#about-love"></a> about love</h3>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/p8ky_CnUii0" frameborder="0" loading="lazy" allowfullscreen></iframe></div>
+<h3 id="about-confidence"><a class="markdownIt-Anchor" href="#about-confidence"></a> about confidence</h3>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/w-HYZv6HzAs" frameborder="0" loading="lazy" allowfullscreen></iframe></div>
+<h3 id="about-what-i-believe"><a class="markdownIt-Anchor" href="#about-what-i-believe"></a> about what I believe</h3>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/TQMbvJNRpLE" frameborder="0" loading="lazy" allowfullscreen></iframe></div>
+<h3 id="the-psychology-of-self-motivation"><a class="markdownIt-Anchor" href="#the-psychology-of-self-motivation"></a> The psychology of self-motivation</h3>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/7sxpKhIbr0E" frameborder="0" loading="lazy" allowfullscreen></iframe></div>
+<h3 id="set-achieveable-goals"><a class="markdownIt-Anchor" href="#set-achieveable-goals"></a> Set achieveable goals</h3>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/vo_lZiytsMw" frameborder="0" loading="lazy" allowfullscreen></iframe></div>
+<h3 id="truely-prohibit-to-do-something"><a class="markdownIt-Anchor" href="#truely-prohibit-to-do-something"></a> Truely prohibit to do something</h3>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/xRf2B4i8468" frameborder="0" loading="lazy" allowfullscreen></iframe></div>
+<h3 id="about-how-self-and-target"><a class="markdownIt-Anchor" href="#about-how-self-and-target"></a> about how self and target</h3>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/4-079YIasck" frameborder="0" loading="lazy" allowfullscreen></iframe></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <tags>
+        <tag>YouTube</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>common distribution&#39;s E(x),D(x)</title>
+    <url>/2020/04/08/common-distribution-s-E-x-D-x/</url>
+    <content><![CDATA[<p><img src="/images/common_distribution_of_Ex_Dx.png" alt="common distruibution of E(x) and D(x)" /></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+  </entry>
+  <entry>
+    <title>demo</title>
+    <url>/2020/04/08/demo/</url>
+    <content><![CDATA[<p>Here are some formular extract from hexo-math<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mrow><mi mathvariant="normal">∂</mi><mi>u</mi></mrow><mrow><mi mathvariant="normal">∂</mi><mi>t</mi></mrow></mfrac><mo>=</mo><msup><mi>h</mi><mn>2</mn></msup><mrow><mo fence="true">(</mo><mfrac><mrow><msup><mi mathvariant="normal">∂</mi><mn>2</mn></msup><mi>u</mi></mrow><mrow><mi mathvariant="normal">∂</mi><msup><mi>x</mi><mn>2</mn></msup></mrow></mfrac><mo>+</mo><mfrac><mrow><msup><mi mathvariant="normal">∂</mi><mn>2</mn></msup><mi>u</mi></mrow><mrow><mi mathvariant="normal">∂</mi><msup><mi>y</mi><mn>2</mn></msup></mrow></mfrac><mo>+</mo><mfrac><mrow><msup><mi mathvariant="normal">∂</mi><mn>2</mn></msup><mi>u</mi></mrow><mrow><mi mathvariant="normal">∂</mi><msup><mi>z</mi><mn>2</mn></msup></mrow></mfrac><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\frac{\partial u}{\partial t}
+= h^2 \left( \frac{\partial^2 u}{\partial x^2} +
+\frac{\partial^2 u}{\partial y^2} +
+\frac{\partial^2 u}{\partial z^2}\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.05744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">∂</span><span class="mord mathdefault">t</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">∂</span><span class="mord mathdefault">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.441138em;vertical-align:-0.95003em;"></span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.491108em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">∂</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord" style="margin-right:0.05556em;">∂</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord mathdefault">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.491108em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">∂</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord" style="margin-right:0.05556em;">∂</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord mathdefault">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804400000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.491108em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">∂</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord" style="margin-right:0.05556em;">∂</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord mathdefault">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span></span></span></span></span></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mo>∫</mo><mn>0</mn><mn>10</mn></msubsup><mi>x</mi><mi>d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">\int_{0}^{10}x dx
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.4759580000000003em;vertical-align:-0.9119499999999999em;"></span><span class="mop"><span class="mop op-symbol large-op" style="margin-right:0.44445em;position:relative;top:-0.0011249999999999316em;">∫</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5640080000000003em;"><span style="top:-1.7880500000000001em;margin-left:-0.44445em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span></span></span></span><span style="top:-3.8129000000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9119499999999999em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">x</span><span class="mord mathdefault">d</span><span class="mord mathdefault">x</span></span></span></span></span></p>
+<p>Simple inline <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>=</mo><mi>b</mi><mo>+</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">a = b + c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">c</span></span></span></span>.</p>
+<hr class="footnotes-sep" />
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><a href="https://github.com/hexojs/hexo-math" target="_blank" rel="noopener">mathjax</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+  </entry>
+  <entry>
+    <title>cycler</title>
+    <url>/2020/04/07/cycler/</url>
+    <content><![CDATA[<h3 id="purpose"><a class="markdownIt-Anchor" href="#purpose"></a> purpose</h3>
+<p>Custom property-cycle settings to control colors and other style properties for multi-line plots.</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Matplotlib</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>law of large numbers and central limit theorem</title>
+    <url>/2020/04/06/law-of-large-numbers-and-central-limit-theorem/</url>
+    <content><![CDATA[<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Probability and Statistics</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>rcParams</title>
+    <url>/2020/04/07/rcParams/</url>
+    <content><![CDATA[<h3 id="purpose"><a class="markdownIt-Anchor" href="#purpose"></a> purpose:</h3>
+<p>Dynamically change the default rc(abbreviation of runtime configuration) style settings in a python script or interactively from the python shell</p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        Code Analysis
+    </div>
+    <div class='spoiler-content'>
+        <figure class="highlight python"><figcaption><span>matplotlib</span><a href="https://matplotlib.org/3.2.1/tutorials/introductory/customizing.html#matplotlibrc-sample" target="_blank" rel="noopener">matplotlib.rcParams</a></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</span><br><span class="line"><span class="keyword">from</span> cycler <span class="keyword">import</span> cycler</span><br><span class="line">plt.style.use(<span class="string">'ggplot'</span>)</span><br><span class="line">data = np.random.randn(<span class="number">50</span>)</span><br><span class="line">print(plt.style.available)</span><br><span class="line">mpl.rcParams[<span class="string">'lines.linewidth'</span>] = <span class="number">2</span></span><br><span class="line">mpl.rcParams[<span class="string">'lines.linestyle'</span>] = <span class="string">'--'</span></span><br><span class="line">plt.plot(data)</span><br></pre></td></tr></table></figure>
+    </div>
+</div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Matplotlib</category>
+      </categories>
+  </entry>
+</search>
