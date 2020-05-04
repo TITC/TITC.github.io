@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>1.The Geometry of Linear Equations</title>
+    <url>/2020/05/04/1-The-Geometry-of-Linear-Equations/</url>
+    <content><![CDATA[<div class="video-container"><iframe src="https://www.youtube.com/embed/J7DzL2_Na80" frameborder="0" loading="lazy" allowfullscreen></iframe></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Liner Algebra</category>
+        <category>MIT</category>
+      </categories>
+  </entry>
+  <entry>
     <title>CHAPTER 1 The Machine Learning Landscape</title>
     <url>/2020/04/08/CHAPTER-1-The-Machine-Learning-Landscape/</url>
     <content><![CDATA[<div class="note default">
@@ -89,6 +98,21 @@ data.</p>
       <categories>
         <category>Google Colab</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Fully Convolutional Networks for Semantic Segmentation</title>
+    <url>/2020/04/22/Fully-Convolutional-Networks-for-Semantic-Segmentation/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/Fully Convolutional Networks for Semantic Segmentation.pdf" data-height="500px"></div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>ReadingPaper</category>
+      </categories>
+      <tags>
+        <tag>Semantic Segmentation</tag>
+        <tag>Convolutional Network</tag>
+        <tag>Deep Learning</tag>
+        <tag>Transfer Learning</tag>
+      </tags>
   </entry>
   <entry>
     <title>CHAPTER 7 Ensemble Learning and Random Forests</title>
@@ -338,62 +362,20 @@ Many people hate to say “I don’t know” when they are asked about something
       </tags>
   </entry>
   <entry>
-    <title>Fully Convolutional Networks for Semantic Segmentation</title>
-    <url>/2020/04/22/Fully-Convolutional-Networks-for-Semantic-Segmentation/</url>
-    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/Fully Convolutional Networks for Semantic Segmentation.pdf" data-height="500px"></div>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>ReadingPaper</category>
-      </categories>
-      <tags>
-        <tag>Semantic Segmentation</tag>
-        <tag>Convolutional Network</tag>
-        <tag>Deep Learning</tag>
-        <tag>Transfer Learning</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ImageNet Classification with Deep Convolutional</title>
-    <url>/2020/04/22/ImageNet-Classification-with-Deep-Convolutional/</url>
-    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/AlexNet.pdf" data-height="500px"></div>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>ReadingPaper</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Joint Optic Disc and Cup Segmentation Based on Multi-label Deep Network and Polar Transformation</title>
-    <url>/2020/04/05/Joint-Optic-Disc-and-Cup-Segmentation-Based-on-Multi-label-Deep-Network-and-Polar-Transformation/</url>
-    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/Joint Optic Disc and Cup Segmentation Based on_yuhang.review.pdf" data-height="500px"></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>ReadingPaper</category>
-        <category>OCR</category>
-        <category>Convlution Neural Network</category>
-        <category>Sementic Segmemtation</category>
-        <category>Object Dectection</category>
-      </categories>
-      <tags>
-        <tag>Convlution Neural Network</tag>
-        <tag>tensorflow</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Man is to Computer Programmer as Woman is to Homemaker?</title>
-    <url>/2020/04/19/Man-is-to-Computer-Programmer-as-Woman-is-to-Homemaker/</url>
-    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/Man is to Computer Programmer as Woman is to Homemaker.pdf" data-height="500px"></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>ReadingPaper</category>
-      </categories>
-      <tags>
-        <tag>word embeddings</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>PCA-aided Fully Convolutional Networks for Semantic Segmentation of Multi-channel fMRI</title>
     <url>/2020/04/20/PCA-aided%20Fully%20Convolutional%20Networks%20for%20Semantic%20Segmentation%20of%20Multi-channel%20fMRI/</url>
-    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/PCA-aided Fully Convolutional Networks for Semantic Segmentation of Multi-channel fMRI.pdf" data-height="500px"></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/PCA-aided Fully Convolutional Networks for Semantic Segmentation of Multi-channel fMRI.pdf" data-height="1024px"></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>ReadingPaper</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Probability and statistics</title>
+    <url>/2020/05/03/Probability-and-statistics/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/Probability and Statistics/Morris H DeGroot_ Mark J Schervish-Probability and statistics-Pearson Education  (2012).pdf" data-height="1024px"></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Books</category>
+        <category>Probability and statistics</category>
       </categories>
   </entry>
   <entry>
@@ -435,6 +417,26 @@ Many people hate to say “I don’t know” when they are asked about something
       </categories>
   </entry>
   <entry>
+    <title>ImageNet Classification with Deep Convolutional</title>
+    <url>/2020/04/22/ImageNet-Classification-with-Deep-Convolutional/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/AlexNet.pdf" data-height="500px"></div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>ReadingPaper</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Man is to Computer Programmer as Woman is to Homemaker?</title>
+    <url>/2020/04/19/Man-is-to-Computer-Programmer-as-Woman-is-to-Homemaker/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/Man is to Computer Programmer as Woman is to Homemaker.pdf" data-height="500px"></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>ReadingPaper</category>
+      </categories>
+      <tags>
+        <tag>word embeddings</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>U-Net: Convolutional Networks for Biomedical</title>
     <url>/2020/04/09/U-Net-Convolutional-Networks-for-Biomedical/</url>
     <content><![CDATA[<div class="note default">
@@ -447,13 +449,20 @@ Many people hate to say “I don’t know” when they are asked about something
       </categories>
   </entry>
   <entry>
-    <title>UML Practice Tutorial Chapter 1 UML Overview</title>
-    <url>/2020/04/27/UML%20Practice%20Tutorial%20Chapter%201%20UML%20Overview/</url>
-    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/UML Practical Tutorial/UML practical tutorial1_uml_overview.pdf" data-height="1024px"></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    <title>Joint Optic Disc and Cup Segmentation Based on Multi-label Deep Network and Polar Transformation</title>
+    <url>/2020/04/05/Joint-Optic-Disc-and-Cup-Segmentation-Based-on-Multi-label-Deep-Network-and-Polar-Transformation/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/Joint Optic Disc and Cup Segmentation Based on_yuhang.review.pdf" data-height="500px"></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
-        <category>Books</category>
-        <category>UML Practice Tutorial</category>
+        <category>ReadingPaper</category>
+        <category>OCR</category>
+        <category>Convlution Neural Network</category>
+        <category>Sementic Segmemtation</category>
+        <category>Object Dectection</category>
       </categories>
+      <tags>
+        <tag>Convlution Neural Network</tag>
+        <tag>tensorflow</tag>
+      </tags>
   </entry>
   <entry>
     <title>UML Practice Tutorial Chapter 8 Active Diagram</title>
@@ -465,9 +474,27 @@ Many people hate to say “I don’t know” when they are asked about something
       </categories>
   </entry>
   <entry>
+    <title>UML Practice Tutorial Chapter 1 UML Overview</title>
+    <url>/2020/04/27/UML%20Practice%20Tutorial%20Chapter%201%20UML%20Overview/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/UML Practical Tutorial/UML practical tutorial1_uml_overview.pdf" data-height="1024px"></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Books</category>
+        <category>UML Practice Tutorial</category>
+      </categories>
+  </entry>
+  <entry>
     <title>UML Practice Tutorial Chapter 2 UML System</title>
     <url>/2020/04/30/UML-Practice-Tutorial-Chapter-2-UML-System/</url>
     <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/UML Practical Tutorial/UML practical tutorial2_uml_system.pdf" data-height="1024px"></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Books</category>
+        <category>UML Practice Tutorial</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>UML Practice Tutorial Chapter 4 Object Diagram</title>
+    <url>/2020/04/30/UML-Practice-Tutorial-Chapter-4-Object-Diagram/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/UML Practical Tutorial/UML practical tutorial4_object_diagram.pdf" data-height="1024px"></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>Books</category>
         <category>UML Practice Tutorial</category>
@@ -484,9 +511,10 @@ Many people hate to say “I don’t know” when they are asked about something
       </categories>
   </entry>
   <entry>
-    <title>UML Practice Tutorial Chapter 4 Object Diagram</title>
-    <url>/2020/04/30/UML-Practice-Tutorial-Chapter-4-Object-Diagram/</url>
-    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/UML Practical Tutorial/UML practical tutorial4_object_diagram.pdf" data-height="1024px"></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    <title>UML Practice Tutorial Chapter 6 UseCase Diagram</title>
+    <url>/2020/04/30/UML-Practice-Tutorial-Chapter-6-UseCase-Diagram/</url>
+    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/UML Practical Tutorial/UML practical tutorial6_usecase_diagram.pdf" data-height="1024px"></div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>Books</category>
         <category>UML Practice Tutorial</category>
@@ -506,16 +534,6 @@ Many people hate to say “I don’t know” when they are asked about something
     <title>UML Practice Tutorial Chapter 7 Interactive Diagram</title>
     <url>/2020/04/30/UML-Practice-Tutorial-Chapter-7-Interactive-Diagram/</url>
     <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/UML Practical Tutorial/UML practical tutorial7_interactive_diagram.pdf" data-height="1024px"></div>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>Books</category>
-        <category>UML Practice Tutorial</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>UML Practice Tutorial Chapter 6 UseCase Diagram</title>
-    <url>/2020/04/30/UML-Practice-Tutorial-Chapter-6-UseCase-Diagram/</url>
-    <content><![CDATA[<div class="pdfobject-container" data-target="/uploads/UML Practical Tutorial/UML practical tutorial6_usecase_diagram.pdf" data-height="1024px"></div>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>Books</category>
@@ -545,6 +563,16 @@ Many people hate to say “I don’t know” when they are asked about something
       </tags>
   </entry>
   <entry>
+    <title>cycler</title>
+    <url>/2020/04/07/cycler/</url>
+    <content><![CDATA[<h3 id="purpose"><a class="markdownIt-Anchor" href="#purpose"></a> purpose</h3>
+<p>Custom property-cycle settings to control colors and other style properties for multi-line plots.</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Matplotlib</category>
+      </categories>
+  </entry>
+  <entry>
     <title>common distribution&#39;s E(x),D(x)</title>
     <url>/2020/04/08/common-distribution-s-E-x-D-x/</url>
     <content><![CDATA[<p><img src="/images/common_distribution_of_Ex_Dx.png" alt="common distruibution of E(x) and D(x)" /></p>
@@ -569,16 +597,6 @@ Many people hate to say “I don’t know” when they are asked about something
 </ol>
 </section>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-  </entry>
-  <entry>
-    <title>cycler</title>
-    <url>/2020/04/07/cycler/</url>
-    <content><![CDATA[<h3 id="purpose"><a class="markdownIt-Anchor" href="#purpose"></a> purpose</h3>
-<p>Custom property-cycle settings to control colors and other style properties for multi-line plots.</p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>Matplotlib</category>
-      </categories>
   </entry>
   <entry>
     <title>law of large numbers and central limit theorem</title>
